@@ -6,7 +6,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-
+var newsRouter = require('./routes/news');
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/NNN', { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -33,6 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/user', usersRouter); // 用户模块
+app.use('/news', newsRouter); // 新闻模块
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {  
