@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const mongoose = require('mongoose');
-
+const fs = require('fs');
 const Cat = mongoose.model('Cat', {
   name: String,
   color: String
@@ -9,17 +9,11 @@ const Cat = mongoose.model('Cat', {
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  const kitty = new Cat({
-    name: 'Nine', color: 'red'
-  });
-  kitty.save().then(data => {
-    res.json(data)
-  });
-  // res.render('index', { title: 'Express' });
+  fs.readFile('./dist/index.html',(err, data) => {
+    if(err) throw err
+    res.end(data)
+  })
 });
 
-router.post('/list', function (req, res, next) {
-  res.send('新闻')
-})
 
 module.exports = router;
